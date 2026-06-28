@@ -15,7 +15,7 @@
 ## 项目结构
 
 ```
-proxy_api_docker/
+proxy_api/
 ├── Dockerfile              # Docker 镜像构建配置
 ├── deno.ts                 # 主代理应用源代码
 ├── entrypoint.sh           # 容器启动脚本
@@ -69,7 +69,7 @@ curl -i http://localhost:8000/openapi/deployments
 |---------|--------|------|
 | `DENO_TARGET_HOST` | `api.groq.com` | 上游 API 服务的主机名 |
 | `DENO_TARGET_PROTOCOL` | `https` | 上游 API 服务的协议（`http` 或 `https`） |
-| `DENOTS_RAW_URL` | `https://raw.githubusercontent.com/xiongli870110-hue/proxy_api_docker/main/deno.ts` | 动态加载 deno.ts 的远程 URL |
+| `DENOTS_RAW_URL` | `https://raw.githubusercontent.com/rakersfu/proxy_api/main/deno.ts` | 动态加载 deno.ts 的远程 URL |
 | `DENOTS_SHA256` | 空（可选） | 期望的 SHA256 校验值，用于验证下载的文件 |
 
 ## 工作流程
@@ -284,7 +284,7 @@ headers.set("X-Custom-Header", "value");
 
 **A:** 当前实现将整个请求体缓存到内存中。如果需要处理大文件，建议修改 `deno.ts` 使用流式处理（使用 `ReadableStream` 而不是 `arrayBuffer()`）。
 
-### Q: 如何���证代理正常工作？
+### Q: 如何论证代理正常工作？
 
 **A:** 查看容器日志：
 
@@ -294,7 +294,7 @@ docker logs proxy-api-container
 
 应该看到类似的输出：
 ```
-Downloading deno.ts from: https://raw.githubusercontent.com/xiongli870110-hue/proxy_api_docker/main/deno.ts
+Downloading deno.ts from: https://raw.githubusercontent.com/rakersfu/proxy_api/main/deno.ts
 Updated /app/deno.ts
 Listening on http://0.0.0.0:8000
 ```
